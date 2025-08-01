@@ -5,7 +5,7 @@ def get_all_items():
     return [item.to_dict() for item in Item.query.all()]
 
 def get_item_by_id(item_id):
-    item = Item.query.get(item_id)
+    item = db.session.get(Item, item_id)
     return item.to_dict() if item else None
 
 def create_item(data):
@@ -19,7 +19,7 @@ def create_item(data):
     return new_item.to_dict()
 
 def update_item(item_id, data):
-    item = Item.query.get(item_id)
+    item = db.session.get(Item, item_id)
     if not item:
         return None
     item.name = data.get('name', item.name)
@@ -29,7 +29,7 @@ def update_item(item_id, data):
     return item.to_dict()
 
 def delete_item(item_id):
-    item = Item.query.get(item_id)
+    item = db.session.get(Item, item_id)
     if not item:
         return False
     db.session.delete(item)

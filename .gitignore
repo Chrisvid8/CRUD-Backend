@@ -26,3 +26,4 @@ dist/
 build/
 
 *.sqlite3
+.pytest_cache/
